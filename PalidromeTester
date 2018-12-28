@@ -1,0 +1,229 @@
+//PLEASE READ: This program uses a stack and a queue to see whether or not a word entered by a user is a palindrome or not 
+include <iostream>
+#include <string>
+using namespace std;
+/****************************************************/
+
+class IntStack
+{
+	//private member variables 
+private:
+	int sizeStack;
+	char *StackAarray;
+	int top;
+public:
+	//constructor 
+	IntStack(int s)
+	{
+		sizeStack = s;
+		top = -1;
+		StackAarray = new char[sizeStack];
+	}
+	//Destructor 
+	~IntStack()
+	{
+		delete[] StackAarray;
+	}
+	//copy constructor
+	IntStack(const IntStack &object2)
+	{
+		if (object2.sizeStack > 0)
+			StackAarray = new char[sizeStack];
+		else StackAarray = NULL;
+		top = object2.top;
+		sizeStack = object2.sizeStack;
+		for (int i = 0; i < sizeStack; i++)
+		{
+			StackAarray[i] = object2.StackAarray[i];
+		}
+
+	}
+	//Now for the functions 
+	void push(char item)
+	{
+		if (IsItFull())
+		{
+			cout << "The stack is full" << endl;
+		}
+		else
+		{
+			top = top + 1;
+			StackAarray[top] = item;
+		}
+	}
+	void pop(char &num)
+	{
+		if (IsItEmpty())
+		{
+			cout << "The stack is empty " << endl;
+		}
+		else
+		{
+			num = StackAarray[top];
+			top--;
+		}
+	}
+	bool IsItFull()
+	{
+		if (top == sizeStack - 1)
+		{
+			return true;
+		}
+		else { return false; }
+	}
+	bool IsItEmpty()
+	{
+		if (top == -1)
+		{
+			return true;
+		}
+		else { return false; }
+	}
+
+	void display()
+	{
+		for (int i = 0; i < 8; i++)
+		{
+			cout << StackAarray[i] << endl;
+		}
+	}
+};
+class IntQueue
+{
+private:
+	int queuesize;
+	int front;
+	int rear;
+	int numItems;
+	char *QueueArray;
+
+public:
+
+	//constructor 
+	IntQueue(int size)
+	{
+		front = -1;
+		rear = -1;
+		numItems = 0;
+		QueueArray = new char[size];
+		queuesize = size;
+	}
+
+	~IntQueue()
+	{
+		delete[] QueueArray;
+	}
+
+	//copy constructor 
+	IntQueue(const IntQueue &obj2)
+	{
+		if (obj2.queuesize > 0)
+			QueueArray = new char[obj2.queuesize];
+		else QueueArray = NULL;
+		front = obj2.front;
+		rear = obj2.rear;
+		numItems = obj2.numItems;
+		queuesize = obj2.queuesize;
+
+		for (int i = 0; i < queuesize; i++)
+		{
+			QueueArray[i] = obj2.QueueArray[i];
+		}
+	}
+	//enqueue 
+	void enqueue(char num)
+	{
+		//add to the rear 
+		if (IsFull())
+		{
+			cout << "Queue is too full" << endl;
+		}
+		else
+		{
+			rear = (rear + 1) % queuesize;
+			QueueArray[rear] = num;
+			numItems++;
+
+		}
+
+	}
+	void dequeue(char &numref)
+	{
+		if (IsEmpty())
+		{
+			cout << "Nothing to pop" << endl;
+		}
+		else
+		{
+			numref = QueueArray[front];
+			front = (front + 1) % queuesize;
+			numItems--;
+
+		}
+
+
+	}
+	bool IsFull()
+	{
+		if (front == queuesize - 1)
+		{
+			return true;
+		}
+		else return false;
+	}
+	bool IsEmpty()
+	{
+		if (numItems == 0) return true;
+		else return false;
+	}
+
+
+};
+//Push into stack and enqueue it 
+//then two for loops and as you pop check with queue if it is the same 
+int main()
+{
+	int count;
+	string word;
+	string word2;
+	cout << "Type in a word to check if it a Palidrome." << endl;
+	getline(cin, word);
+	word = word2;
+	int size = word.length();
+	IntStack stackObj(size);
+	IntQueue queueObj(size);
+
+	for (int i = 0; i < size; i++)
+	{
+		count = size - 1;
+		stackObj.push(word[i]);
+		queueObj.enqueue(word2[count]);
+		count--;
+	}
+	bool palidrome;
+	for (int i = 0; i < size; i++)
+	{
+		stackObj.pop(word[i]);
+		queueObj.dequeue(word2[i]);
+		if (word[i] == word2[i])
+		{
+			cout << word << endl;
+			stackObj.pop(word[i]);
+			queueObj.dequeue(word2[i]);
+			palidrome = true;
+		}
+		else
+		{
+			palidrome = false;
+
+
+		}
+	}
+	if (palidrome)
+		cout << "It is a palidrome" << endl;
+	else
+		cout << "It is not" << endl;
+
+
+	system("pause");
+}
