@@ -1,0 +1,60 @@
+//PLEASE READ: Uses a map to find a course the user wants to find and give its details.
+//These course numbers are the data and are the courses that can be found:
+/*
+CS101, CS102, CS103, NT110, CM241
+*/
+#include <iostream>
+#include <map>
+#include <string>
+using namespace std;
+//17_2: Course Information 
+int main()
+{
+	map<string, int> roomNumber =
+	{
+		{"CS101", 3004}, {"CS102", 4501},
+		{"CS103", 6755}, {"NT110", 1244},
+		{"CM241", 1411}
+	};
+
+	map <string, string> instructor =
+	{
+		{"CS101", "Haynes"}, {"CS102", "Alvarado"},
+		{"CS103", "Rich"}, {"NT110", "Burke"},
+		{"CM241", "Lee"}
+
+	};
+
+	map<string, string> MeetingTime =
+	{
+		{"CS101", "8:00 a.m."}, {"CS102", "9:00 a.m."},
+		{"CS103", "10:00 a.m. "}, {"NT110", "11:00 a.m."},
+		{"CM241", "1:00 p.m. "}
+
+	};
+	string element;
+	cout << "Enter a course number" << endl;
+	cin >> element;
+	
+	string doAgain;
+	//do {
+		if (roomNumber.count(element))
+		{
+			cout << "For course number: " << element << endl;
+			cout << "Room number is: " << roomNumber.at(element) << endl;
+			cout << "Instructor is: " << instructor.at(element) << endl;
+			cout << "Meeting Room Time is: " << MeetingTime.at(element) << endl;
+			
+		}
+		else
+		{
+			cout<<"Course info not found"<<endl;
+			
+		}
+		
+		//cout << "Find course info again?" << endl;
+		//cin >> doAgain;
+	//} //while (doAgain == "y" || "Y" || "Yes" || "yes");
+
+	system("pause");
+}
