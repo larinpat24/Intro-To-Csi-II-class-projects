@@ -1,0 +1,54 @@
+//Simulates a poll. The user enters in what was the favorite beverage of as many people as were surveyed and then exits the program 
+//and gets a poll tally at the end
+#include <iostream>
+#include <iomanip>
+using namespace std;
+int main()
+{
+
+	int choice = 0, votesCoffee= 0, votesTea=0, votesCoke=0, votesOrangejuice=0;
+	int count=0, numOfPeople = 1; 
+	cout << "Please input the favorite beverage of person # "<<numOfPeople<<": Choose 1, 2, 3, or 4 from the below menu or -1 to exit the program. " << endl<<endl;
+	cout << "MENU---Favorite Beverage" << endl<<endl;
+	cout << "1. Coffee" << endl << "2. Tea" << endl << "3. Coke" << endl << "4. Orange juice" << endl << "5. Hit -1 to exit"<<endl<<endl;
+	
+
+	cin >> choice;
+	while (choice != -1)
+	{
+		switch (choice)
+		{
+		case 1: votesCoffee = votesCoffee++;
+			break;
+		case 2: votesTea = votesTea++;
+			break;
+		case 3: votesCoke = votesCoke++;
+			break;
+		case 4: votesOrangejuice = votesOrangejuice++;
+			break;
+		default: {cout << "Invalid Selection.";
+			count = count - 1;
+			numOfPeople = numOfPeople - 1; }
+		}
+
+		numOfPeople = numOfPeople + 1;
+		cout << "Please input the favorite beverage of person # "<<numOfPeople<<": Choose 1, 2, 3, or 4 from the below menu or -1 to exit the program." << endl << endl;
+		cout << "MENU---Favorite Beverage" << endl << endl;
+		cout << "1. Coffee" << endl << "2. Tea" << endl << "3. Coke" << endl << "4. Orange juice" << endl << "5. Hit -1 to exit" << endl << endl;
+		cin >> choice;
+		count = count+1;
+
+	}
+
+	
+	cout << count <<" People were surveyed. Here are the total votes for each beverage: " << endl<<endl;
+	cout << " Beverage:         Votes:" << endl;
+	cout << " Coffee:"<<setw(16)<< votesCoffee << endl;
+	cout << " Tea:" << setw(19) << votesTea << endl;
+	cout << " Coke:" << setw(18) << votesCoke << endl;
+	cout << " Orange Juice:" << setw(10) << votesOrangejuice << endl<<endl;
+
+	cout<< "Thanks for voting! Your input is valuable to us." << endl<<endl;
+
+
+}
