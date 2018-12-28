@@ -1,0 +1,110 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+using namespace std;
+// BASIC CLASS CONSTRUCTION 
+string getName();
+int getID();
+string getDept();
+string getpos();
+class Employee
+{
+private:
+	string name;
+	int id_Number;
+	string department;
+	string position;
+public:
+	//This is using inline functions 
+	//setters
+	/*void setName(string n) { name = n; };
+	void setID(int id) { id_Number = id; };
+	void setDept(string dept) { department = dept; };
+	void setpos(string pos) { position = pos; };
+
+	//getters
+	string getName() { return name; };
+	int getID() { return id_Number; };
+	string getDept() { return department; };
+	string getpos() { return position; }; */
+
+	//prototype for our class declarations 
+	void setName(string);
+	void setID(int);
+	void setDept(string);
+	void setpos(string);
+	string getName();
+	int getID();
+	string getDept();
+	string getpos();
+
+	//constructors
+	Employee(string n, int id, string dept, string pos) { name = n; id_Number = id; department = dept; position = pos; }
+	Employee(string n, int id) { name = n; id_Number = id; department = ""; position = ""; }
+	Employee() { name = ""; id_Number = 0; department = ""; position = ""; }
+
+};
+
+//Another way is to use prototype before the class decalration and then these function definitions (diff method than using inline functions).
+//mutators functions
+void Employee::setName(string n)
+{
+	name = n;
+
+}
+void Employee:: setID(int id)
+{
+	id_Number = id;
+}
+void Employee::setDept(string dept)
+{
+	department = dept;
+}
+void Employee::setpos(string pos)
+{
+	position = pos;
+}
+//accessor function 
+string Employee:: getName()
+{
+	return name;
+}
+int Employee:: getID()
+{
+	return id_Number;
+}
+string Employee::getDept()
+{
+	return department;
+}
+string Employee::getpos()
+{
+	return position; 
+}
+int main()
+{
+	//static for object 1
+	Employee E1("Susan Meyers", 47899, "Accounting", "Vice President");
+	Employee E2;
+	E2.setName("Mark Jones");
+	E2.setID(39119);
+	E2.setDept("IT");
+	E2.setpos("Programming");
+	//dynamically
+	Employee *E3 = new Employee("Joy Rogers", 81774);
+	E3->setDept("Manufacturing");
+	E3->setpos("Engineer");
+
+	cout<< "Data for Employees:" << endl;
+	cout << "____________________" << endl << endl;
+	cout << "Employee 1: " << endl;
+	cout << "Name: " << E1.getName() << " , ID Number: " << E1.getID() << " , Department: " << E1.getDept() << " , Position: " << E1.getpos() << endl;
+	cout << "Employee 2: " << endl;
+	cout << "Name: " << E2.getName() << " , ID Number: " << E2.getID() << " , Department: " << E2.getDept() << " , Position: " << E2.getpos()<<endl;
+	cout << "Employee 3: " << endl;
+	cout << "Name: " << E3->getName() << " , ID Number: " << E3 ->getID() << " , Department: " << E3 ->getDept() << " , Position: " << E3 ->getpos()<<endl<<endl;
+	system("pause");
+
+
+
+}
