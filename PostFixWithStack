@@ -1,0 +1,229 @@
+#include <iostream>
+#include <string>
+#include <stack>
+using namespace std;
+//Topic: Math Expressions 
+/*Prompt: 
+1) Read in an infix expression 
+2) Convert it to a postfix expression
+3) Evaluate the postfix expression */
+//***********************
+
+//Function to check if exp[i] is an operator 
+bool isOperator(char ch)
+{
+	if (ch=='+'|| ch == '-' || ch == '*' || ch == '/')
+		return true;
+	else
+		return false;
+}
+
+
+
+
+//function to check if it is an operand 
+bool isItOperand(char ch)
+{
+	if (!isOperator(ch) && ch!='(' && ch!=')')
+	{
+		return true;
+	}
+	else return false;
+}
+
+//function for performing operation in evalating postfix step 
+int performOperation(int op1, int op2, char op)
+{
+	int ans;
+	switch (op) {
+	case '+':
+		ans = op2 + op1;
+		break;
+	case '-':
+		ans = op2 - op1;
+		break;
+	case '*':
+		ans = op2 * op1;
+		break;
+	case '/':
+		ans = op2 / op1;
+		break;
+	}
+	return ans;
+}
+
+//Function to check weight of an operator of its priority 
+int priority(char ch)
+{
+	int w;
+	switch (ch)
+	{
+	case '+':
+		w= 1;
+		break;
+	case '-':
+		w = 1;
+		break;
+	case '*':
+		w = 2;
+		break;
+	case '/':
+		w = 2;
+		break;
+	case '(':
+		w = 3;
+		break;
+	}
+	return w;
+}
+
+string InfixConvertToPostfix(string exp) 
+{
+	//read in an infix expression from the user 
+
+	string postfixExp = "";
+	stack <char> s; //created stack of type char 
+	int size = exp.length();
+	for (int i = 0; i < size; i++)
+	{
+		if (exp[i] == ' ') continue;
+
+		else if (isItOperand(exp[i])) //if the value is an operand, add to postfix string 
+		{
+			postfixExp = postfixExp + exp[i];
+		}
+
+		else if (isOperator(exp[i])) // otherise if an operator 
+		{
+
+			//first must check it's priority 
+
+			while (!s.empty() && (priority(exp[i]) <= priority(s.top())) && s.top() != '(')
+			{
+				postfixExp = postfixExp + s.top();
+				s.pop();
+			}
+
+			s.push(exp[i]); //push on if exp[i] is greater or (
+
+
+		}
+		else if (exp[i] == '(')
+		{
+			s.push(exp[i]);
+		}
+		else if (exp[i] == ')')
+		{
+			while (!s.empty() && s.top() != '(')
+			{
+				postfixExp = postfixExp + s.top();
+				s.pop();				//pop till hit left (
+			}
+			//pop off left  
+			s.pop();
+
+
+		}
+	}
+	//now no more characters in infix exp, pop off remaining 
+	while (!s.empty())
+	{
+		postfixExp = postfixExp + s.top();
+		s.pop();
+	}
+	return postfixExp;
+}
+
+/*
+//Postfix Evaluation 
+int EvaluatePostFix(string expression)
+{
+	int ans = 0;
+	int op1 = 0, op2 = 0;
+	stack <int> s2;
+	int size = expression.length();
+	for (int i = 0; i <size; i++)
+	{
+		if (isItOperand(expression[i])) //if value is operand push it in 
+		{
+			int x = expression[i];
+			s2.push(x);
+		}
+		else if (isOperator(expression[i])) //if operator, push out 2 operands, do math, push back in
+		{
+			op1 = s2.top();
+			s2.pop();
+			op2 = s2.top();
+			s2.pop();
+			int value = performOperation(op1, op2, expression[i]);
+			s2.push(value); 
+		}
+	}
+	return ans = s2.top();
+}
+*/
+int evaluatePostFix(string exp, int size)
+{
+	stack<int> s2;
+
+	int i = 0;
+	int value;
+	char ch;
+
+	while (i < size)
+	{
+		ch = exp[i];
+
+		if (isdigit(ch))
+		{
+			s2.push(ch - '0'); 
+		}
+
+		else
+		{
+			int op1 = s2.top(); 
+			s2.pop();
+
+			int op2 = s2.top(); 
+			s2.pop();
+
+			value = performOperation(op1, op2, ch); 
+
+			s2.push(value);
+		}
+
+		i++; 
+	}
+
+	return value;
+}
+
+//Main 
+int main()
+{
+	
+	 
+	string exp;
+	string conversion;
+	cout << "Enter an infix expression that consist of numerals, or (, or ) ,( ex can use 5+(3*6) )" << endl;
+	getline(cin, exp);
+
+	//Now time to convert to postfix expression 
+	conversion = InfixConvertToPostfix(exp);
+	cout << conversion << endl;
+	int sizee=conversion.length();
+//Now time to evaluate the postfix expression 
+	int ans;
+	ans = evaluatePostFix(conversion, sizee);
+	cout << "Here is the evaluated expression: " << ans << endl;
+
+	cout << "Demonstrating a hardcoded version: " << endl;
+	string y = InfixConvertToPostfix("5 + (6 * 3)");
+	cout << "Infix is 5 + (6 * 3), and the converted postfix is: "<< y << endl;
+	int SIZE = y.length();
+	int answer = evaluatePostFix(y, SIZE);
+	cout << "Here is the evaulated expression: " << answer << endl;
+	system("pause");
+
+}
+
