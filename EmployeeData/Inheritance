@@ -5,6 +5,9 @@ using namespace std;
 //Employee and Production Worker Classes 
 
 //base class Employee
+
+//PLEASE READ: this program uses the concept of Inheritance in OOP to give information on shiftworkers and production workers 
+//derived from  general Employee class 
 class Employee {
 private:
 	string name_employee;
@@ -17,7 +20,7 @@ public:
 	{
 		string n = " "; int num = 0; string d = " ";
 	}
-	Employee(string n , int num , string d )
+	Employee(string n, int num, string d)
 	{
 		name_employee = n;
 		number_employee = num;
@@ -92,8 +95,49 @@ public:
 	}
 
 };
+class ShiftSupervisor:public Employee
+{
+private:
+	double annual_salary;
+	double production_bonus;
+public:
+	void set_bonus(double b)
+	{
+		production_bonus = b;
+		
+	}
+	void set_salary(double s)
+	{
+		annual_salary = s;
+	}
+	void set_annual_salary()
+	{
+
+	}
+	double getbonus()
+	{
+		return production_bonus;
+	}
+	double getAnnual_Salary()
+	{
+		return annual_salary;
+	}
+	ShiftSupervisor(double b, double s, string n, int num, string d) :Employee(n, num, d)
+	{
+		annual_salary = b;
+		production_bonus = s;
+	}
+	ShiftSupervisor() :Employee()
+	{
+		annual_salary = 0.0;
+		production_bonus = 0.0;
+	}
+	
+	
+};
 int main()
 {
+	double salary=0.0,  bonus=0.0;
 	string name, hire_date;
 	int number;
 	int shiftType = 0;
@@ -101,8 +145,8 @@ int main()
 	string shiftWords;
 	cout << "What is the employee's name? " << endl;
 	getline(cin, name);
-	cout<<"What is their number, and hire date ? " << endl;
-	cin>> number >> hire_date;
+	cout << "What is their number, and hire date ? " << endl;
+	cin >> number >> hire_date;
 
 	cout << "What is the employee's shift? Enter 1 for day or 2 for night" << endl;
 	cin >> shiftType;
@@ -116,24 +160,33 @@ int main()
 	{
 		shiftWords = "Day Shift";
 	}
-	else  
+	else
 	{
 		shiftWords = "Night Shift";
 	}
-	
-	
+
+
 	cout << "Enter in the Employee's Hourly pay rate" << endl;
 	cin >> hPayRate;
 	cout << endl;
 	//Now display the information  
-	cout<<"Here are the Employee's details" << endl;
+	cout << "Here are the Employee's details" << endl;
 	ProductionWorker Employee1(shiftType, hPayRate, name, number, hire_date);
 	cout << "Employee Name: " << Employee1.get_name_employee() << endl;
 	cout << "Employee Number: " << Employee1.get_number_employee() << endl;
 	cout << "Employee Hire Date: " << Employee1.get_hire_date() << endl;
-	cout << "Employee's Shift Type: " << Employee1.getshift()<<" which is, "<<shiftWords<< endl;
-	cout << "Employee Hourly Pay Rate: " << Employee1.gethrlypay() << endl;
+	cout << "Employee's Shift Type: " << Employee1.getshift() << " which is, " << shiftWords << endl;
+	cout << "Employee Hourly Pay Rate: " << Employee1.gethrlypay() << endl << endl;
 
+	//Now output for Shift Worker
+	cout << "Now the program will ouput the shift supervisor salary and production bonus" << endl;
+	cout << "What is the ShiftWorker's salary?" << endl;
+	cin >> salary;
+	cout << "What is the ShiftWorker's bonus?" << endl;
+	cin >> bonus;
+	ShiftSupervisor shift (salary, bonus,name,number,hire_date);
+	cout << "Shiftworker's salary is: " << salary << endl;
+	cout << "ShiftWorker's bonus is: " << bonus << endl;
 	system("pause");
 	return 0;
 }
