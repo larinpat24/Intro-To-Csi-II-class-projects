@@ -1,0 +1,44 @@
+/*In this lab we had to correct a code that showed the amount of grains of rice per square 
+when the amount increased by one grain each square. We had to write a flowchart, and answer other questions too.*/
+#include <iostream>
+using namespace std;
+int main()
+{
+
+	char repeat = 'N';
+	int squareNum;
+	float amount;
+	do {
+
+		amount = 1;
+		cout << "Which square 1-64: ";
+		//add code to validate user input
+		cin >> squareNum;
+		if (squareNum >= 1 && squareNum <= 64)
+		{
+			if (squareNum == 1)
+			{
+				cout << "The reward on sqaure 1 is 1";
+			}
+			else
+			{
+				for (int i = 2; i <= squareNum; i++)
+			
+					amount += amount;
+					cout << endl << "The reward on sqaure " << squareNum << " is: " << amount<<endl;
+				
+			}
+			cout << endl<<"Enter 'Y' to repeat, 'N' to quit: ";
+			cin >> repeat;
+		}
+		
+		else
+		{
+			cout << "You must enter a number in range 1-64 "<<endl;
+			cout << "Enter 'Y' to repeat, 'N' to quit: ";
+			cin >> repeat;
+		}
+		
+	}
+	while (repeat == 'Y' || repeat == 'y');
+} 
