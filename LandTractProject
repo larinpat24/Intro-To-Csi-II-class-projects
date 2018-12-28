@@ -1,0 +1,59 @@
+//PLEASE READ: sees if two land tracts have the same area using OOP
+
+#include <iostream>
+using namespace std;
+
+class LandTract
+{
+private:
+	double length, width;
+
+public:
+	//constructor 
+	LandTract(double l = 0.0, double w = 0.0)
+	{
+		length = l;
+		width = w;
+	}
+	//Multiply the two land tract's dimensions 
+	double getArea()
+	{
+		return length * width;
+	}
+	void Equal(LandTract&obm2)
+	{
+		LandTract temp;
+		temp.length = length;
+		temp.width = width;
+		double x = temp.getArea();
+		double y = obm2.getArea();
+		if (x==y)
+		{
+			cout << "The two tract's of land have the same areas." << endl;
+		}
+		else
+		{
+			cout << "The two tract's of land do not have the same areas." << endl;
+		}
+	}
+};
+
+int main()
+{
+	int l, w;
+	
+	cout << "Enter the dimension for the first tract of land." << endl;
+	cin >> l >> w;
+	LandTract tract1(l, w);
+	cout<<"Enter the dimension for the second tract of land." << endl;
+	cin >> l >> w;
+	LandTract tract2(l, w);
+	cout << "Now we will find the areas for each tract of land." << endl;
+	//Call Multiply funct
+	cout<<"Area of tract 1 is: "<<tract1.getArea()<<endl;
+	cout << "Area of tract 2 is: " << tract2.getArea() << endl;
+
+	//see if the areas are equal
+	tract1.Equal(tract2);
+	system("pause");
+}
