@@ -1,0 +1,92 @@
+//PLEASE READ: This program calculates the average of a set of test scores and uses exception handling to throw an error for wrong input
+#include <iostream>
+#include <string>
+using namespace std;
+//TestScores Program
+class TestScores
+{
+private:
+	double testScores[5];
+	double average = 0;
+	double sum = 0;
+public:
+	TestScores(double ts[5])
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			testScores[i] = ts[i];
+		}
+	}
+
+	class NegativeSize
+	{};
+	double AvgTestScores(double scores[], int size)
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			if (scores[i] < 0 || scores[i]>100)
+			{
+				throw  NegativeSize();
+			}
+			else
+			{
+
+				sum = sum + scores[i];
+			}
+		}
+
+		average = sum / 5;
+		return average;
+
+	}
+};
+
+int main()
+{
+	double avg = 0;
+	double arrayScores[5];
+	bool tryAgain = true;
+	for (int i = 0; i < 5; i++)
+	{
+		cout << "Enter test score: " << i + 1 << endl;
+		cin >> arrayScores[i];
+	}
+
+	TestScores object1(arrayScores);
+	//while (tryAgain == true)
+	//{
+	try
+	{
+		cout << "Now time to calculate the test scores" << endl;
+		avg = object1.AvgTestScores(arrayScores, 5);
+		cout << "The average of the test scores is: " << avg << endl;
+		//tryAgain = false;
+	}
+	catch (TestScores::NegativeSize)
+	{
+		cout << "Error: Invalid test score. You entered a negative score, or a score over 100." << endl;
+		//cout << "Try again." << endl;
+		/*for (int i = 0; i < 5; i++)
+		{
+			cout << "Enter test score: " << i + 1 << endl;
+			cin >> arrayScores[i];
+		}
+		for (int i = 0; i < 5; i++)
+		{
+			cout << "This time you entered: " << endl;
+			cout << arrayScores[i] << endl;
+		}
+	}
+
+} */
+
+		
+
+
+	}
+	cout << "Thanks so much for using the program :D. Have a good day!" << endl;
+
+	system("pause");
+}
+
+					
