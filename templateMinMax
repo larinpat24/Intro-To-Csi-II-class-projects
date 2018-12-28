@@ -1,0 +1,59 @@
+#include <iostream>
+using namespace std;
+//Project: Minimum and Maximum templates 
+//PLEASE READ: Uses template to find min and max of two numbers 
+template <class T>
+T minimumFunction(T num1, T num2)
+{
+	if (num1 < num2)
+	{
+		return num1;
+	}
+	else
+	{
+		return num2;
+	}
+}
+template <class T>
+T maximumFunction(T num1, T num2)
+{
+	if (num1 > num2)
+	{
+		return num1;
+	}
+	else
+	{
+		return num2;
+	}
+}
+
+int main()
+{
+	int minNum1, minNum2;
+	cout << "Testing minimum function now with data type int" << endl;
+	cout << "What is number 1 (must be an int)?, and number 2 (must be an int)?" << endl;
+	cin >> minNum1 >> minNum2;
+	cout<<"Number returned is: " <<minimumFunction(minNum1, minNum2)<<endl;
+
+	double a, b;
+	cout << "Testing minimum function now with data type double" << endl;
+	cout << "What is number 1 (must be a double)?, and number 2 (must be a double)?" << endl;
+	cin >> a >> b;
+	cout << "Number returned is: " << minimumFunction(a, b) << endl;
+	cout<<"*****************************************************************************"<<endl;
+	
+	int d, f;
+	cout << "Testing maximum function now with data type int" << endl;
+	cout << "What is number 1 (must be an int)?, and number 2 (must be an int)?" << endl;
+	cin >> d >> f;
+	cout << "Number returned is: " << maximumFunction(d, f) << endl;
+
+	double g, h;
+	cout << "Testing maximum function now with data type double" << endl;
+	cout << "What is number 1 (must be a double)?, and number 2 (must be a double)?" << endl;
+	cin >> g >> h;
+	cout << "Number returned is: " << maximumFunction(g, h) << endl;
+	cout << "*****************************************************************************" << endl;
+	cout << "Thank you for using the program. Program will now terminate. :D" << endl;
+	system("pause");
+}
