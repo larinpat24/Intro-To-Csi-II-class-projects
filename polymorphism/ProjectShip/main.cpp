@@ -1,4 +1,4 @@
-
+//PLEASE READ: This project uses virtual functions, object arrays, and OPP to gather and list data on different ships 
 #include <string>
 #include "Ship.h"
 #include "CruiseShip.h"
