@@ -1,0 +1,102 @@
+#include <iostream>
+#include <string>
+using namespace std;
+//PLEASE READ: This project asks the user to enter and day (1-365) and gives back its date. Example 67 is March 8th.
+class DayOfYear
+{
+private:
+	 int day;
+	static string month;
+
+public:
+	DayOfYear(int d)
+	{
+		day = d;
+	}
+	DayOfYear()
+	{
+		day = 0;
+	}
+	int getDay()
+	{
+		return day;
+	}
+	void setDay(int d)
+	{
+		day = d;
+	}
+	 void print (int d)
+	{
+		if (d >= 1 && d <= 31)
+		{
+			
+			cout<< "January"<<" "<<d;
+		}
+		else if (d >= 32 && d <= 59)
+		{
+			cout << "Febuary" << " " << d-31;
+		}
+		else if (d >= 60 && d <= 90)
+		{
+			cout << "March" << " " << d-59;
+
+		}
+		else if (d >= 91 && d <= 120)
+		{
+			cout << "April" << " " << d-90;
+		}
+		else if (d >= 121 && d <= 151)
+		{
+			cout << "May" << " " << d-120;
+		}
+		else if (d >= 152 && d <= 181)
+		{
+			cout << "June" << " " << d-151;
+		}
+		else if (d >= 182 && d <= 212)
+		{
+			cout << "July" << " " << d-181;
+		}
+		else if (d >= 213 && d <= 243)
+		{
+			cout << "August" << " " << d-212;
+		}
+		else if (d >= 244 && d <= 273)
+		{
+			cout << "September" << " " << d-243;
+		}
+		else if (d >= 274 && d <= 304)
+		{
+			cout << "October" << " " << d-273;
+		}
+		else if (d >= 305 && d <= 334)
+		{
+			cout << "November" << " " << d-304;
+		}
+		else if (d >= 335 && d <= 365)
+		{
+			cout << "December" << " " << d-334;
+		}
+		else
+			cout << "Invalid days, try again" << endl;
+}
+	
+};
+
+int main()
+{
+	int dayUserWants;
+	cout << "Enter a day of the year (1-365), and I will tell you it's date." << endl;
+	cin >> dayUserWants;
+	while (dayUserWants <= 0)
+	{
+		cout << "Try again." << endl;
+		cout << "Enter a day  of the year (1-365), and I will tell you it's date." << endl;
+		cin >> dayUserWants;
+
+	}
+	DayOfYear D1(dayUserWants);
+	 D1.print(dayUserWants);
+	 cout << endl;
+	 system("pause");
+}
