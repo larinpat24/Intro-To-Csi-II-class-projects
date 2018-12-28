@@ -1,0 +1,125 @@
+//PLEASE READ: Uses a stack and OOP to reverse contents in a file
+// In the file I had typed E L E P H A N T S
+#include <iostream>
+#include <fstream>
+using namespace std;
+//Ch 19, Lab 
+class IntStack
+{
+	//private member variables 
+private:
+	int sizeStack;
+	char *StackAarray;
+	int top;
+public:
+	//constructor 
+	IntStack(int s)
+	{
+		sizeStack = s;
+		top = -1;
+		StackAarray = new char[sizeStack];
+	}
+	//Destructor 
+	~IntStack()
+	{
+		delete[] StackAarray;
+	}
+	//copy constructor
+	IntStack(IntStack &object2)
+	{
+		top = object2.top;
+		sizeStack = object2.sizeStack;
+		StackAarray = new char[sizeStack];
+		for (int i = 0; i < sizeStack; i++)
+		{
+			StackAarray[i] = object2.StackAarray[i];
+		}
+		
+	}
+	//Now for the functions 
+	void push(char item)
+	{
+		if (IsItFull())
+		{
+			cout << "The stack is full" << endl;
+		}
+		else
+		{
+			top = top + 1;
+			StackAarray[top] = item;
+		}
+	}
+	void pop(char &num)
+	{
+		if (IsItEmpty())
+		{
+			cout << "The stack is empty " << endl;
+		}
+		else
+		{
+			num = StackAarray[top];
+			top--;
+		}
+	}
+	bool IsItFull()
+	{
+		if (top == sizeStack - 1)
+		{
+			return true;
+		}
+		else { return false; }
+	}
+	bool IsItEmpty()
+	{
+		if (top == -1)
+		{
+			return true;
+		}
+		else { return false;}
+	}
+
+	void display()
+	{
+		for (int i = 0; i < 8; i++)
+		{
+			cout << StackAarray[i] << endl;
+		}
+	}
+};
+int main()
+
+{
+	
+	IntStack stackObject(8);
+	ifstream inputFile;
+	inputFile.open("stackInput.txt");
+
+	cout << "Now we will input into the stack" << endl;
+	char x = ' ';
+	while(inputFile)
+	{
+		inputFile >> x;
+		stackObject.push(x);
+		//This part is for doing the getting the input
+		
+	}
+	inputFile.close();
+	//Now data has been entered in the stack
+	cout << "Now will display the data that was entered in stack" << endl;
+
+	
+	cout << "Stack that  user created is : " << endl;
+	ofstream outputFile;
+	outputFile.open("newFile.txt");
+
+	while (!stackObject.IsItEmpty())
+	{
+		stackObject.pop(x);
+		
+		
+		outputFile << x;
+	}
+	outputFile.close();
+
+	system("pause");
+}
