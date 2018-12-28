@@ -1,0 +1,93 @@
+//PLEASE READ: This program overloaded operator to add, subtract, multiply, and divide member variables of two objects. 
+#include <iostream>
+using namespace std;
+
+class Calculator
+{
+private:
+	double a;
+public:
+	//The constructor 
+	Calculator(double b = 0)
+	{
+		a = b;
+	}
+
+	//overloaded + operator 
+	Calculator operator+(const Calculator & c)
+	{
+		Calculator temp;
+		temp.a = a + c.a;
+		return temp;
+	}
+
+	//oveloaded - operator 
+	Calculator operator-(const Calculator &c)
+	{
+		Calculator temp;
+		temp.a = a - c.a;
+		return temp;
+	}
+
+	//overloaded *operator
+	Calculator operator*(const Calculator &c)
+	{
+		Calculator temp;
+		temp.a = a * c.a;
+		return temp;
+	}
+
+	//overloaded /operator
+	Calculator operator/(const Calculator &c)
+	{
+		Calculator temp;
+		temp.a = a / c.a;
+
+		return temp;
+	}
+
+	//overloaded output stream operator <<
+	friend ostream& operator << (ostream& output, const Calculator& c)
+	{
+		output << "Calcuator a = " << c.a << endl;
+		return output;
+	}
+
+	//overloaded input stream operator >>
+	friend istream& operator>>(istream& input, Calculator& c)
+	{
+		cout << "Type in the value ";
+		input >> c.a;
+		return input;
+	}
+};
+
+int main()
+{
+
+cout << "Now demonstrating the overloaded input and output stream operators." << endl;
+	Calculator c; //object that will contain the answer after calculations 
+	cout << "You will be asked to type the value for the first object's member variable: " << endl;
+	Calculator a; //first object to be used in calculations 
+	cin >> a; //user enters what they want member variable of first object to be
+	cout << " user typed: " << endl;
+	cout << a; //tells you what they entered
+
+	cout<<"You will be asked to type value for the second object's member variable: " << endl;
+	Calculator b; //second object to be used in calculatins
+	cin >> b; //user enters what they want member variable of first object to be
+	cout << " user typed: " << endl;
+	cout << b; //tells you what they entered
+
+cout << "Now demonstrating the overloaded +, -, *, and / operators with two new objects." << endl;
+	c = a + b; //adds two objects
+	cout << "c = " << c; //displays ans
+	c = a - b; // calls function to subtract two objects 
+	cout << "c = " << c; //displays ans
+	c = a * b; //calls function to multiply two objects 
+	cout << "c = " << c; //displays ans
+	c = a / b; //calls function to divide two objects
+	cout << "c = " << c; //displays ans
+
+	system("pause");
+}
